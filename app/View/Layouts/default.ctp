@@ -15,7 +15,7 @@
  */
 
 $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
-$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
+$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version());
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,6 +26,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<?php echo $this->fetch('title'); ?>
 	</title>
 	<?php
+		if (!empty($metaDescription)) {
+			echo $this->Html->meta('description', $metaDescription);
+		}
+		if (!empty($metaKeywords)) {
+			echo $this->Html->meta('keywords', $metaKeywords);
+		}
+
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('cake.generic');
@@ -40,24 +47,40 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<div id="header">
 			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
 		</div>
-		<div id="content">
 
+		<div class="menu-head" id="menu">
+			<?php echo $this->element('menu'); ?>
+		</div>
+
+		<div id="content">
 			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
+			<?php echo $this->element('menu', array('type' => 'bottom')); ?>
+			<div class="menu-bottom">
+					<?php echo $this->Html->link($this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
 					'http://www.cakephp.org/',
 					array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
-				);
-			?>
-			<p>
+						);
+					?>
+				<div class="left">
 				<?php echo $cakeVersion; ?>
-			</p>
+				</div>
+				<div class="center">
+				<?php echo $this->Html->link(__('Powered by Coderity'), 'http://www.coderity.com', array('target' => '_blank')); ?>
+				</div>
+			</div>
 		</div>
+		<?php
+			$analytics = $this->requestAction(array('controller' => 'settings', 'action' => 'get', 'google_analytics'));
+			if ($analytics) {
+				echo $analytics;
+			}
+		?>
+
+		<?php echo $this->element('sql_dump'); ?>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>

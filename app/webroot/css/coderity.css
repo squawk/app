@@ -1,0 +1,67 @@
+form .error {
+	background: #FFDACC;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	font-weight: normal;
+	padding: 10px;
+}
+form .error-message {
+	-moz-border-radius: none;
+	-webkit-border-radius: none;
+	border-radius: none;
+	border: none;
+	background: none;
+	margin: 0;
+	padding-top: 6px;
+	padding-left: 4px;
+	padding-right: 0;
+}
+form .error,
+form .error-message {
+	color: #9E2424;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	-ms-box-shadow: none;
+	-o-box-shadow: none;
+	box-shadow: none;
+	text-shadow: none;
+}
+.check {
+	margin-left: 21px;
+}
+.check label {
+	margin-left: -20px;
+}
+.sidebar {
+		z-index: 1;
+		position: absolute;
+		width: 250px;
+		margin-top: 0px;
+}
+.page-header {
+  padding-bottom: 9px;
+  margin: 20px 0 20px;
+  border-bottom: 1px solid #eee;
+}
+.navbar {
+  position: relative;
+  min-height: 30px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+.navbar-top-links li a {
+	padding: 5px;
+	min-height: 0px;
+}
+.navbar-top-links a:hover {
+	padding: 5px;
+	min-height: 0px;
+}
+.sign-in {
+	text-align: center;
+}
+.bottom-links {
+	padding-top: 10px;
+	text-align: center;
+}

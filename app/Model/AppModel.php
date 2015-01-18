@@ -1,33 +1,76 @@
 <?php
-/**
- * Application model for CakePHP.
- *
- * This file is application-wide model file. You can put all
- * application-wide model-related methods here.
- *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       app.Model
- * @since         CakePHP(tm) v 0.2.9
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
+App::uses('AppModel', 'Model');
 
-App::uses('Model', 'Model');
-
-/**
- * Application model for Cake.
- *
- * Add your application-wide methods in the class below, your models
- * will inherit them.
- *
- * @package       app.Model
- */
 class AppModel extends Model {
+	public $actsAs = array('Containable');
+
+/**
+* This method generates a slug from a title
+*
+* @param  string $title The title or name
+* @param  string $id The ID of the model
+* @return string Slug
+*/
+	public function generateSlug($title = null, $id = null, $separator = '-') {
+		if (!$title) {
+			throw new NotFoundException(__('Invalid Title'));
+		}
+
+		$title = strtolower($title);
+		$slug  = Inflector::slug($title, $separator);
+
+		$conditions = array();
+		$conditions[$this->alias . '.slug'] = $slug;
+
+		if ($id) {
+			$conditions[$this->primaryKey. ' NOT'] = $id;
+		}
+
+		$total = $this->find('count', array('conditions' => $conditions, 'recursive' => -1));
+		if ($total > 0) {
+			for ($number = 2; $number > 0; $number ++) {
+				$conditions[$this->alias . '.slug'] = $slug . $separator . $number;
+
+				$total = $this->find('count', array('conditions' => $conditions, 'recursive' => -1));
+				if ($total == 0) {
+					return $slug . $separator . $number;
+				}
+			}
+		}
+
+		return $slug;
+	}
+
+/**
+* This function matches two fields - a useful extension for Cake Validation
+*
+* @param string|array $check Value to check
+* @param string $compareField The field to compare
+* @return boolean Success
+*/
+	public function matchFields($check = array(), $compareField = null) {
+		$value = array_shift($check);
+
+		if (!empty($value) && !empty($this->data[$this->name][$compareField])) {
+			if ($value !== $this->data[$this->name][$compareField]) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+/**
+ * A nice little validate data method
+ * @param  array  $data
+ * @return boolean
+ */
+	public function validate($data = array()) {
+		if (!$data) {
+			throw new NotFoundException(__('Invalid Data'));
+		}
+
+		$this->set($data);
+		return $this->validates();
+	}
 }

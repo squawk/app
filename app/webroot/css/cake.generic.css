@@ -97,6 +97,15 @@ p {
 	background: #003d4c;
 	text-decoration: underline;
 }
+#menu a {
+	color: #fff;
+	list-style: none;
+}
+#menu li {
+	list-style: none;
+	text-decoration: none;
+	display: inline;
+}
 #content{
 	background: #fff;
 	clear: both;
@@ -108,13 +117,28 @@ p {
 	clear: both;
 	padding: 6px 10px;
 }
+#footer li {
+	list-style: none;
+	display: inline;
+}
 #header a, #footer a {
 	color: #fff;
 }
 #cake-powered {
 	float: right;
 }
-
+.center {
+	text-align: center;
+}
+.left {
+	float: left;
+}
+.menu-head {
+	margin-left: 10px;
+}
+.menu-bottom {
+	margin-top: 20px;
+}
 /** containers **/
 div.form,
 div.index,

@@ -112,3 +112,16 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+
+Configure::write('Coderity', array(
+      'routes' => array(
+                  'autoRouting' => true,
+                  'autoRoutingIgnoreRoutes' => 'add|view|display|delete|admin|users|leads|blog'
+               ),
+      'blocks' => true,
+      'articles' => true,
+      'leads' => true,
+      'redirects' => true,
+      'additionalAdminMenu' => array(),
+      'checkInstall' => true
+   ));

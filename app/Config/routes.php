@@ -25,16 +25,27 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
-/**
- * ...and connect the rest of 'Pages' controller's URLs.
- */
-	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+
+	Router::connect('/admin', array('admin' => true, 'controller' => 'users', 'action' => 'home'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
  */
 	CakePlugin::routes();
+
+	if (Configure::read('Coderity.routes.autoRouting')) {
+        $ignore = 'add|view|display|delete|admin|users|leads|blog';
+        if (Configure::read('Coderity.routes.autoRoutingIgnoreRoutes')) {
+            $ignore = Configure::read('Coderity.routes.autoRoutingIgnoreRoutes');
+        }
+
+        Router::connect('/:route', array('controller' => 'pages', 'action' => 'display'),
+        array(
+            'route' => '(?!' . $ignore . '\b)\b[a-zA-Z0-9_-]+',
+            'pass'=>array('route')
+        ));
+    }
 
 /**
  * Load the CakePHP default routes. Only remove this if you do not want to use
