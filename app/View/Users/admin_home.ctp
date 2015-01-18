@@ -17,6 +17,7 @@
 <?php endif; ?>
 
 <?php
+	/*
 	$folders = array(WWW_ROOT . 'img/uploads', WWW_ROOT . 'img/uploads/thumbs');
 
 	foreach ($folders as $folder) : ?>
@@ -24,6 +25,7 @@
 			<div class="alert alert-warning"><i class="fa fa-info-circle"></i> <?php echo __('Create the folder %s and make sure it is writable.', $folder);?></div>
 		<?php endif; ?>
 	<?php endforeach;
+	*/
 ?>
 
 <div class="row">
