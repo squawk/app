@@ -5,11 +5,8 @@
 </div>
 
 <div class="panel panel-default">
-	<?php $name = trim($lead['Lead']['name']); ?>
 	<div class="panel-heading">
-		<?php if(!empty($name)) : ?>
-			<?php echo $lead['Lead']['name']; ?>
-		<?php endif; ?>
+		<?php echo $lead['Lead']['name']; ?>
 	</div>
 	<div class="panel-body">
 	<?php echo $this->Form->create();?>
@@ -32,48 +29,6 @@
 			<dl class="dl-horizontal">
 				<dt><?php echo __('Phone Number'); ?><dt>
 				<dd><?php echo $lead['Lead']['phone']; ?><dd>
-			</dl>
-		<?php endif; ?>
-
-		<?php if(!empty($lead['Lead']['version'])) : ?>
-			<dl class="dl-horizontal">
-				<dt><?php echo __('CakePHP Version'); ?><dt>
-				<dd><?php echo $lead['Lead']['version']; ?><dd>
-			</dl>
-		<?php endif; ?>
-
-		<?php if(!empty($lead['Lead']['website_type'])) : ?>
-			<dl class="dl-horizontal">
-				<dt><?php echo __('Website Type'); ?><dt>
-				<dd><?php echo $lead['Lead']['website_type']; ?><dd>
-			</dl>
-		<?php endif; ?>
-
-		<?php if(!empty($lead['Lead']['pages'])) : ?>
-			<dl class="dl-horizontal">
-				<dt><?php echo __('Number of Pages'); ?><dt>
-				<dd><?php echo $lead['Lead']['pages']; ?><dd>
-			</dl>
-		<?php endif; ?>
-
-		<?php if(!empty($lead['Lead']['requirements'])) : ?>
-			<dl class="dl-horizontal">
-				<dt><?php echo __('Website Requirements'); ?><dt>
-				<dd><?php echo $lead['Lead']['requirements']; ?><dd>
-			</dl>
-		<?php endif; ?>
-
-		<?php if(!empty($lead['Lead']['design'])) : ?>
-			<dl class="dl-horizontal">
-				<dt><?php echo __('Design Required'); ?><dt>
-				<dd><?php echo __('Yes'); ?><dd>
-			</dl>
-		<?php endif; ?>
-
-		<?php if(!empty($lead['Lead']['css'])) : ?>
-			<dl class="dl-horizontal">
-				<dt><?php echo __('CSS Required'); ?><dt>
-				<dd><?php echo __('Yes'); ?><dd>
 			</dl>
 		<?php endif; ?>
 
